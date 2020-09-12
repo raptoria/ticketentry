@@ -1,0 +1,98 @@
+{
+  "name": "pnlchart",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server --mode=development",
+    "build": "webpack --config webpack.config.js --mode=production",
+    "test": "jest",
+    "eject": "react-scripts eject",
+    "server": "ts-node ./server/server.ts"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "test/*"
+    ],
+    "delay": "2500"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "transform": {
+      ".+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "^.+.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$": "jest-transform-stub"
+    },
+    "transformIgnorePatterns": [
+      "./node_modules/"
+    ],
+    "setupFiles": [
+      "raf/polyfill"
+    ],
+    "setupFilesAfterEnv": [
+      "./src/setupTests.ts"
+    ]
+  },
+  "dependencies": {
+    "antd": "^4.6.3",
+    "node-sass": "^4.14.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-split-pane": "^0.1.92",
+    "sass-loader": "^10.0.2"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.10.6",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/express": "^4.17.8",
+    "@types/jest": "^26.0.13",
+    "@types/mock-fs": "^4.10.0",
+    "@types/node": "14.10.0",
+    "@types/react": "16.9.49",
+    "@types/react-dom": "16.9.8",
+    "babel-jest": "^26.3.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.1.0",
+    "css-loader": "^4.3.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.4",
+    "file-loader": "^6.1.0",
+    "html-webpack-plugin": "^4.4.1",
+    "jest": "^26.4.2",
+    "jest-enzyme": "^7.1.2",
+    "jest-transform-stub": "^2.0.0",
+    "mini-css-extract-plugin": "^0.11.1",
+    "mock-fs": "^4.13.0",
+    "nodemon": "^2.0.4",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "raf": "^3.4.1",
+    "resolve-url-loader": "^3.1.1",
+    "style-loader": "^1.2.1",
+    "terser-webpack-plugin": "^4.1.0",
+    "ts-jest": "^26.3.0",
+    "ts-loader": "^8.0.3",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "write-file-webpack-plugin": "^4.5.1"
+  }
+}
