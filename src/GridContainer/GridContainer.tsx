@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { AgGridReact } from '@ag-grid-community/react';
 import { Alert } from 'antd';
 import { GridReadyEvent } from '@ag-grid-community/core';

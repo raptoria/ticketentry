@@ -1,31 +1,28 @@
-import React, { useReducer, useEffect, useMemo, createContext } from 'react';
-import { initialState, State, AppStateContextType } from './types';
+import React, { useReducer, useEffect, createContext } from 'react';
+import { StoreContextType } from './types';
 import { reducer } from '../reducers/grid';
-import { submitOrder } from '../actions/actions';
+import { useActions } from '../actions/actions';
+import { initialState } from './initialState';
+//import { applyMiddleware } from '../middleware/middleware';
 
-const AppStateContext = createContext<AppStateContextType>(
-  {} as AppStateContextType
+export const StoreContext = createContext<StoreContextType>(
+  {} as StoreContextType
 );
 
-export const AppStateProvider: React.FC = ({ children }) => {
+export const StoreProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   useEffect(() => {
     console.log('rendering'); //removelater
   });
 
-  //synonymous with bindActionCreators in mapDispatchToProps
-  const actions = useMemo(
-    () => ({
-      submitOrder: (order: State['order']): void => {
-        dispatch(submitOrder(order));
-      },
-    }),
-    [dispatch]
-  );
+  //const enhancedDispatch = applyMiddleware(dispatch);
+  //const actions = useActions(enhancedDispatch);
+
+  const actions = useActions(dispatch);
 
   return (
-    <AppStateContext.Provider value={{ state, actions }}>
+    <StoreContext.Provider value={{ state, actions }}>
       {children}
-    </AppStateContext.Provider>
+    </StoreContext.Provider>
   );
 };
