@@ -56,7 +56,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-split-pane": "^0.1.92",
-    "sass-loader": "^10.0.2"
+    "sass-loader": "^10.0.2",
+    "@ag-grid-community/client-side-row-model": "^23.2.1",
+    "@ag-grid-community/core": "^23.2.1",
+    "@ag-grid-community/react": "^23.2.1"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.6",
