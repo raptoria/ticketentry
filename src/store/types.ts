@@ -1,4 +1,4 @@
-import { GridOptions, ColDef, Module } from '@ag-grid-community/core';
+import { GridOptions, Module } from '@ag-grid-community/core';
 import { submitOrder } from '../actions/actions';
 
 export const enum ActionTypes {
@@ -13,7 +13,7 @@ export interface Order {
   qty: number;
   price: number;
   stopPrice: number;
-  orderType: string;
+  orderType: OrderType;
   tif: string;
   comment: string;
 }
@@ -35,6 +35,11 @@ export interface StoreContext {
 export interface StoreContextType {
   state: State;
   actions: Actions;
+}
+
+export enum OrderType {
+  LMT = 'lmt',
+  MKT = 'mkt',
 }
 
 export interface GridProps extends GridOptions {

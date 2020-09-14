@@ -56,6 +56,11 @@ export const grid = {
     resizable: true,
     flex: 1,
     filter: true,
+    cellStyle: {
+      border: '0',
+      borderLeft: '1px solid',
+      borderColor: '#dde2eb',
+    },
   },
   overlayNoRowsTemplate: 'No orders to display.',
   error: null,

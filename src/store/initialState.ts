@@ -1,4 +1,4 @@
-import { State } from './types';
+import { State, OrderType } from './types';
 import { grid } from '../reducers/grid';
 
 export const initialState: State = {
@@ -8,7 +8,7 @@ export const initialState: State = {
     qty: 0,
     price: 0.0,
     stopPrice: 0.0,
-    orderType: 'Market',
+    orderType: OrderType.MKT,
     tif: 'Day',
     comment: '',
   },
