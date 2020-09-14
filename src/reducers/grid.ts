@@ -1,8 +1,8 @@
 import { Reducer } from 'react';
-import { State, Action, ActionTypes } from '../store/types';
+import { State, Action, ActionTypes, GridProps } from '../store/types';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 
-export const grid = {
+export const grid: GridProps = {
   rowData: [
     {
       action: 'buy',
@@ -67,12 +67,11 @@ export const grid = {
   gridHeight: '100%',
 };
 
-export const reducer: Reducer<State, Action> = (state, action) => {
+export const gridReducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case ActionTypes.submitOrder:
+      console.log('running reducer', action.type);
       return { ...state }; //do stuff here
-
-      break;
   }
   return state;
 };

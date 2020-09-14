@@ -4,7 +4,7 @@ import GridContainer from '../GridContainer/GridContainer';
 import { StoreContext } from '../store/store';
 const styles = require('./orderblotter.module.scss');
 
-function OrderBlotter() {
+const OrderBlotter: React.FC = () => {
   const headerHeight = getComputedStyle(
     document.documentElement
   ).getPropertyValue('--header-height');
@@ -39,6 +39,6 @@ function OrderBlotter() {
       />
     </div>
   );
-}
+};
 
 export default OrderBlotter;

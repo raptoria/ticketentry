@@ -1,11 +1,13 @@
 import { GridOptions, Module } from '@ag-grid-community/core';
-import { submitOrder } from '../actions/actions';
+import { submitOrder, editOrder } from '../actions/actions';
 
-export const enum ActionTypes {
-  submitOrder = 'SUBMIT_ORDER',
+export interface FieldData {
+  name: string[];
+  value: any;
+  touched: boolean;
+  validating: boolean;
+  errors: string[];
 }
-
-export type Action = { type: ActionTypes.submitOrder; order: State['order'] };
 
 export interface Order {
   action: string;
@@ -19,12 +21,23 @@ export interface Order {
 }
 
 export interface State {
-  order: Order;
+  order: FieldData[];
   grid: GridProps;
+  [index: string]: FieldData[] | GridProps;
 }
 
-interface Actions {
+export const enum ActionTypes {
+  submitOrder = 'SUBMIT_ORDER',
+  editOrder = 'EDIT_ORDER',
+}
+
+export type Action =
+  | { type: ActionTypes.submitOrder; order: State['order'] }
+  | { type: ActionTypes.editOrder; order: State['order'] };
+
+export interface Actions {
   submitOrder: (...p: Parameters<typeof submitOrder>) => void;
+  editOrder: (...p: Parameters<typeof editOrder>) => void;
 }
 
 export interface StoreContext {

@@ -8,7 +8,15 @@ export const submitOrder = (order: State['order']): Action => {
   };
 };
 
+export const editOrder = (order: State['order']): Action => {
+  return {
+    type: ActionTypes.editOrder,
+    order,
+  };
+};
+
 //synonymous with bindActionCreators in mapDispatchToProps
 export const useActions = (dispatch: Dispatch<Action>) => ({
   submitOrder: (order: State['order']): void => dispatch(submitOrder(order)),
+  editOrder: (order: State['order']): void => dispatch(editOrder(order)),
 });
