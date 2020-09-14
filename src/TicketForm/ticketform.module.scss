@@ -22,7 +22,8 @@
 
 @media all and (max-width: 500px) {
   .grid {
-    grid-template-columns: max-content;
-    grid-template-rows: max-content;
+    grid-template-columns: repeat(2, max-content);
+    grid-template-rows: none;
+    grid-auto-rows: max-content;
   }
 }

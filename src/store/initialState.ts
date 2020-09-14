@@ -1,5 +1,5 @@
-import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { State } from './types';
+import { grid } from '../reducers/grid';
 
 export const initialState: State = {
   order: {
@@ -12,11 +12,5 @@ export const initialState: State = {
     tif: 'Day',
     comment: '',
   },
-  grid: {
-    rowData: [],
-    modules: [ClientSideRowModelModule],
-    columnDefs: [],
-    defaultColDef: {},
-    error: null,
-  },
+  grid,
 };

@@ -38,9 +38,7 @@ export interface StoreContextType {
 }
 
 export interface GridProps extends GridOptions {
-  rowData: Array<Order>;
   modules: Array<Module>;
-  columnDefs: Array<ColDef>;
-  defaultColDef: ColDef;
   error: string | null;
+  gridHeight: string;
 }

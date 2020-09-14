@@ -5,13 +5,20 @@ import { StoreContext } from '../store/store';
 const styles = require('./orderblotter.module.scss');
 
 function OrderBlotter() {
-  /*   const headerHeight = getComputedStyle(
+  const headerHeight = getComputedStyle(
     document.documentElement
-  ).getPropertyValue("--headerHeight"); */
-  /*   const gridHeight = `calc(100% - ${headerHeight} )`; //gets rid of scrollbars */
+  ).getPropertyValue('--header-height');
+  const gridHeight = `calc(100% - ${headerHeight} )`; //get rid of  grid scrollbars */
 
   const { state } = useContext(StoreContext);
-  const { rowData, modules, columnDefs, defaultColDef, error } = state.grid;
+  const {
+    rowData,
+    modules,
+    columnDefs,
+    defaultColDef,
+    overlayNoRowsTemplate,
+    error,
+  } = state.grid;
 
   return (
     <div className={styles.orderBlotter}>
@@ -22,10 +29,12 @@ function OrderBlotter() {
         extra="Last Updated On: MAKEMEDYNAMIC"
       />
       <GridContainer
+        gridHeight={gridHeight}
         rowData={rowData}
         modules={modules}
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
+        overlayNoRowsTemplate={overlayNoRowsTemplate}
         error={error}
       />
     </div>
