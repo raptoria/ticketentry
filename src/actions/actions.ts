@@ -8,7 +8,7 @@ export const submitOrder = (payload: State['order']): Action => {
   };
 };
 
-export const receiveOrder = (payload: State['grid']): Action => {
+export const receiveOrder = (payload: State['order']): Action => {
   return {
     type: ActionTypes.receiveOrder,
     payload,
@@ -24,7 +24,9 @@ export const editOrder = (payload: State['order']): Action => {
 
 //synonymous with bindActionCreators in mapDispatchToProps, 2nd arg of connect
 export const useActions = (dispatch: Dispatch<Action>) => ({
-  receiveOrder: (grid: State['grid']): void => dispatch(receiveOrder(grid)),
-  submitOrder: (order: State['order']): void => dispatch(submitOrder(order)),
-  editOrder: (order: State['order']): void => dispatch(editOrder(order)),
+  receiveOrder: (payload: State['order']): void =>
+    dispatch(receiveOrder(payload)),
+  submitOrder: (payload: State['order']): void =>
+    dispatch(submitOrder(payload)),
+  editOrder: (payload: State['order']): void => dispatch(editOrder(payload)),
 });

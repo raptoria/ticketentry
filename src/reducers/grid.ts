@@ -5,7 +5,10 @@ export const grid: Reducer<State['grid'], Action> = (state, action) => {
   switch (action.type) {
     case ActionTypes.receiveOrder:
       console.log('running reducer', action.type);
-      return { ...state, rowData: action.payload.rowData };
+      return {
+        ...state,
+        rowData: [...state.rowData, action.payload],
+      };
   }
   return state;
 };

@@ -35,8 +35,6 @@ export const StoreProvider: React.FC = ({ children }) => {
   const enhancedDispatch = applyMiddleware(dispatch);
   const actions = useActions(enhancedDispatch);
 
-  //const actions = useActions(dispatch);
-
   return (
     <StoreContext.Provider value={{ state, actions }}>
       {children}

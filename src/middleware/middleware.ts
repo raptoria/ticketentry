@@ -12,7 +12,7 @@ export const applyMiddleware = (dispatch: Dispatch<Action>) => async (
         () =>
           dispatch({
             type: ActionTypes.receiveOrder,
-            payload: { rowData: [action.payload] },
+            payload: action.payload,
           }),
         2000
       );

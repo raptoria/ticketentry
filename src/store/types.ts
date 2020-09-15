@@ -41,7 +41,7 @@ export const enum ActionTypes {
 
 export type Action =
   | { type: ActionTypes.submitOrder; payload: State['order'] }
-  | { type: ActionTypes.receiveOrder; payload: Partial<State['grid']> }
+  | { type: ActionTypes.receiveOrder; payload: State['order'] }
   | { type: ActionTypes.editOrder; payload: State['order'] };
 
 export interface Actions {
