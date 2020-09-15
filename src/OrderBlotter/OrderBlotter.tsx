@@ -19,7 +19,7 @@ const OrderBlotter: React.FC = () => {
     overlayNoRowsTemplate,
     error,
   } = state.grid;
-
+  console.log('re-rendering blotter');
   return (
     <div className={styles.orderBlotter}>
       <PageHeader

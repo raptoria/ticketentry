@@ -32,7 +32,7 @@ export const enum ActionTypes {
 }
 
 export type Action =
-  | { type: ActionTypes.submitOrder; order: State['order'] }
+  | { type: ActionTypes.submitOrder; order: State['grid'] }
   | { type: ActionTypes.editOrder; order: State['order'] };
 
 export interface Actions {

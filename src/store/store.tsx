@@ -1,9 +1,9 @@
 import React, { useReducer, useEffect, createContext } from 'react';
 import { StoreContextType, State, Action } from './types';
-import { gridReducer } from '../reducers/grid';
-import { orderReducer } from '../reducers/order';
+import { grid } from '../reducers/grid';
+import { order } from '../reducers/order';
 import { useActions } from '../actions/actions';
-import { initialState } from './initialState';
+import { initialState } from '../state/initialState';
 //import { applyMiddleware } from '../middleware/middleware';
 
 const combineReducers = (slices: any) => (state: State, action: Action) =>
@@ -15,14 +15,19 @@ const combineReducers = (slices: any) => (state: State, action: Action) =>
     state
   );
 
+//use combineReducers just like redux so each reducer gets a slice of the state
+const rootReducer = combineReducers({
+  grid,
+  order,
+});
+
 export const StoreContext = createContext<StoreContextType>(
   {} as StoreContextType
 );
 
 export const StoreProvider: React.FC = ({ children }) => {
-  //const rootReducer = combineReducers({ gridReducer, orderReducer });
+  const [state, dispatch] = useReducer(rootReducer, initialState);
 
-  const [state, dispatch] = useReducer(orderReducer, initialState);
   useEffect(() => {
     console.log('rendering App'); //removelater
   });
@@ -31,6 +36,7 @@ export const StoreProvider: React.FC = ({ children }) => {
   //const actions = useActions(enhancedDispatch);
 
   const actions = useActions(dispatch);
+  //const store = React.useMemo(() => ({ state, actions }), [state, actions]);
 
   return (
     <StoreContext.Provider value={{ state, actions }}>
