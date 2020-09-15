@@ -1,5 +1,5 @@
 import { GridOptions, Module } from '@ag-grid-community/core';
-import { submitOrder, editOrder } from '../actions/actions';
+import { submitOrder, editOrder, receiveOrder } from '../actions/actions';
 
 export interface FieldData {
   name: string[];
@@ -35,17 +35,18 @@ export interface State {
 
 export const enum ActionTypes {
   submitOrder = 'SUBMIT_ORDER',
-  receiveOrder = 'SUBMIT_ORDER',
+  receiveOrder = 'RECEIVE_ORDER',
   editOrder = 'EDIT_ORDER',
 }
 
 export type Action =
-  | { type: ActionTypes.submitOrder; order: State['grid'] }
-  | { type: ActionTypes.receiveOrder; order: State['grid'] }
-  | { type: ActionTypes.editOrder; order: State['order'] };
+  | { type: ActionTypes.submitOrder; payload: State['order'] }
+  | { type: ActionTypes.receiveOrder; payload: Partial<State['grid']> }
+  | { type: ActionTypes.editOrder; payload: State['order'] };
 
 export interface Actions {
   submitOrder: (...p: Parameters<typeof submitOrder>) => void;
+  receiveOrder: (...p: Parameters<typeof receiveOrder>) => void;
   editOrder: (...p: Parameters<typeof editOrder>) => void;
 }
 

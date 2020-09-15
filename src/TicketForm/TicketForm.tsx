@@ -29,9 +29,9 @@ const TicketForm: React.FC = () => {
 
   const isMarketOrder = OrderType.MKT === order.orderType;
 
-  const onChange = (allValues: any) => {
-    console.log('Received values from form: ', allValues);
-    actions.editOrder(allValues);
+  const onChange = (values: Order) => {
+    console.log('Received values from form: ', values);
+    actions.editOrder(values);
   };
   /* 
   const validateNum = (rule: Rule, value: any) => {
@@ -42,6 +42,11 @@ const TicketForm: React.FC = () => {
     return Promise.reject('Should be > 0');
   };
  */
+
+  const onFinish = (values: Order) => {
+    actions.submitOrder(values);
+  };
+
   return (
     <div className={styles.ticketForm}>
       <PageHeader title="EXD Trader" subTitle="Order Entry" />
@@ -49,8 +54,9 @@ const TicketForm: React.FC = () => {
       <Form
         className={styles.grid}
         fields={getFieldData(order)}
-        onValuesChange={(changedValues, allValues) => {
-          onChange(allValues);
+        onFinish={onFinish}
+        onValuesChange={(changedValues, values) => {
+          onChange(values);
         }}
       >
         <Form.Item label="Action" name="action">

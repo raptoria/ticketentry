@@ -4,7 +4,7 @@ import { grid } from '../reducers/grid';
 import { order } from '../reducers/order';
 import { useActions } from '../actions/actions';
 import { initialState } from '../state/initialState';
-//import { applyMiddleware } from '../middleware/middleware';
+import { applyMiddleware } from '../middleware/middleware';
 
 const combineReducers = (slices: any) => (state: State, action: Action) =>
   Object.keys(slices).reduce(
@@ -32,10 +32,10 @@ export const StoreProvider: React.FC = ({ children }) => {
     console.log('rendering App'); //removelater
   });
 
-  //const enhancedDispatch = applyMiddleware(dispatch);
-  //const actions = useActions(enhancedDispatch);
+  const enhancedDispatch = applyMiddleware(dispatch);
+  const actions = useActions(enhancedDispatch);
 
-  const actions = useActions(dispatch);
+  //const actions = useActions(dispatch);
 
   return (
     <StoreContext.Provider value={{ state, actions }}>
