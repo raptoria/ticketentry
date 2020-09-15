@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { PageHeader, Button, Form, Select, Input, InputNumber } from 'antd';
 import { StoreContext } from '../store/store';
-import { OrderType, Order, FieldData } from '../store/types';
+import { OrderType, Order, FieldData, OrderKeys } from '../store/types';
 const styles = require('./ticketform.module.scss');
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-const convertToFieldData = (order: Order): FieldData[] => {
+const getFieldData = (order: Order): FieldData[] => {
   const fields: FieldData[] = [];
   for (const [key, value] of Object.entries(order)) {
     fields.push({
@@ -15,24 +15,23 @@ const convertToFieldData = (order: Order): FieldData[] => {
       value,
       touched: false,
       validating: false,
-      errors: [],
+      errors: order.errors[key as OrderKeys] || [],
     });
   }
   return fields;
 };
 
-const getOrderType = (arr: FieldData[]) =>
-  arr.find((d: FieldData) => d.name.toString() == 'orderType');
-
 const TicketForm: React.FC = () => {
-  const { state, actions } = useContext(StoreContext);
+  const {
+    state: { order },
+    actions,
+  } = useContext(StoreContext);
 
-  const isMarketOrder =
-    OrderType.MKT === getOrderType(state.order)?.value.toString();
+  const isMarketOrder = OrderType.MKT === order.orderType;
 
   const onChange = (allValues: any) => {
     console.log('Received values from form: ', allValues);
-    actions.editOrder(convertToFieldData(allValues));
+    actions.editOrder(allValues);
   };
   /* 
   const validateNum = (rule: Rule, value: any) => {
@@ -49,7 +48,7 @@ const TicketForm: React.FC = () => {
 
       <Form
         className={styles.grid}
-        fields={state.order}
+        fields={getFieldData(order)}
         onValuesChange={(changedValues, allValues) => {
           onChange(allValues);
         }}

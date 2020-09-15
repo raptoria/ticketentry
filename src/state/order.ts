@@ -1,60 +1,13 @@
-import { FieldData } from '../store/types';
+import { Order, OrderType } from '../store/types';
 
-export const order: FieldData[] = [
-  {
-    name: ['action'],
-    value: 'buy',
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-  {
-    name: ['symbol'],
-    value: '',
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-  {
-    name: ['qty'],
-    value: 0,
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-  {
-    name: ['price'],
-    value: 0,
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-  {
-    name: ['stopPrice'],
-    value: 0,
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-  {
-    name: ['orderType'],
-    value: 'mkt',
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-  {
-    name: ['tif'],
-    value: 'day',
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-  {
-    name: ['comment'],
-    value: '',
-    touched: false,
-    validating: false,
-    errors: [],
-  },
-];
+export const order: Order = {
+  action: 'buy',
+  comment: '',
+  orderType: OrderType.MKT,
+  price: 0,
+  qty: 0,
+  stopPrice: 0,
+  symbol: '',
+  tif: 'day',
+  errors: {}, //{ qty: ['oops!'] },
+};

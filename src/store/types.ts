@@ -9,6 +9,12 @@ export interface FieldData {
   errors: string[];
 }
 
+export type OrderKeys = keyof Order;
+
+type FieldError = {
+  [key in OrderKeys]?: string[];
+};
+
 export interface Order {
   action: string;
   symbol: string;
@@ -18,21 +24,24 @@ export interface Order {
   orderType: OrderType;
   tif: string;
   comment: string;
+  errors: FieldError;
 }
 
 export interface State {
-  order: FieldData[];
+  order: Order;
   grid: GridProps;
-  [index: string]: FieldData[] | GridProps;
+  [index: string]: Order | GridProps;
 }
 
 export const enum ActionTypes {
   submitOrder = 'SUBMIT_ORDER',
+  receiveOrder = 'SUBMIT_ORDER',
   editOrder = 'EDIT_ORDER',
 }
 
 export type Action =
   | { type: ActionTypes.submitOrder; order: State['grid'] }
+  | { type: ActionTypes.receiveOrder; order: State['grid'] }
   | { type: ActionTypes.editOrder; order: State['order'] };
 
 export interface Actions {

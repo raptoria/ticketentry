@@ -51,15 +51,16 @@
     ]
   },
   "dependencies": {
+    "@ag-grid-community/client-side-row-model": "^23.2.1",
+    "@ag-grid-community/core": "^23.2.1",
+    "@ag-grid-community/react": "^23.2.1",
     "antd": "^4.6.3",
+    "conditional-expression": "^1.1.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-split-pane": "^0.1.92",
-    "sass-loader": "^10.0.2",
-    "@ag-grid-community/client-side-row-model": "^23.2.1",
-    "@ag-grid-community/core": "^23.2.1",
-    "@ag-grid-community/react": "^23.2.1"
+    "sass-loader": "^10.0.2"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.6",

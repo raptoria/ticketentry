@@ -36,7 +36,6 @@ export const StoreProvider: React.FC = ({ children }) => {
   //const actions = useActions(enhancedDispatch);
 
   const actions = useActions(dispatch);
-  //const store = React.useMemo(() => ({ state, actions }), [state, actions]);
 
   return (
     <StoreContext.Provider value={{ state, actions }}>
