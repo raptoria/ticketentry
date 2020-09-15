@@ -1,7 +1,13 @@
 import React, { useContext } from 'react';
 import { PageHeader, Button, Form, Select, Input, InputNumber } from 'antd';
 import { StoreContext } from '../store/store';
-import { OrderType, Order, FieldData, OrderKeys } from '../store/types';
+import {
+  OrderType,
+  Order,
+  FieldData,
+  OrderKeys,
+  Direction,
+} from '../store/types';
 const styles = require('./ticketform.module.scss');
 
 const { Option } = Select;
@@ -61,8 +67,8 @@ const TicketForm: React.FC = () => {
       >
         <Form.Item label="Action" name="action">
           <Select>
-            <Option value="buy">Buy</Option>
-            <Option value="sell">Sell</Option>
+            <Option value={Direction.BUY}>Buy</Option>
+            <Option value={Direction.SELL}>Sell</Option>
           </Select>
         </Form.Item>
 
@@ -86,8 +92,8 @@ const TicketForm: React.FC = () => {
 
         <Form.Item label="Order Type" name="orderType">
           <Select>
-            <Option value="lmt">Limit</Option>
-            <Option value="mkt">Market</Option>
+            <Option value={OrderType.LMT}>Limit</Option>
+            <Option value={OrderType.MKT}>Market</Option>
           </Select>
         </Form.Item>
 

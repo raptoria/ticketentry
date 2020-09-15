@@ -1,19 +1,9 @@
 import { GridProps } from '../store/types';
+import { uppercaseRenderer } from '../GridContainer/renderers/uppercaseRenderer';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 
 export const grid: GridProps = {
-  rowData: [
-    {
-      action: 'buy',
-      symbol: 'AAPL',
-      qty: 10,
-      orderType: 'LMT',
-      tif: 'DAY',
-      price: 100,
-      stopPrice: 103,
-      comment: 'A comment.',
-    },
-  ],
+  rowData: [],
   modules: [ClientSideRowModelModule],
   columnDefs: [
     {
@@ -23,6 +13,7 @@ export const grid: GridProps = {
     {
       headerName: 'Symbol',
       field: 'symbol',
+      cellRenderer: 'uppercaseRenderer',
     },
     {
       headerName: 'Qty',
@@ -35,6 +26,7 @@ export const grid: GridProps = {
     {
       headerName: 'TIF',
       field: 'tif',
+      cellRenderer: 'uppercaseRenderer',
     },
     {
       headerName: 'Price',
@@ -60,6 +52,9 @@ export const grid: GridProps = {
       borderLeft: '1px solid',
       borderColor: '#dde2eb',
     },
+  },
+  frameworkComponents: {
+    uppercaseRenderer,
   },
   overlayNoRowsTemplate: 'No orders to display.',
   error: null,

@@ -17,6 +17,7 @@ const OrderBlotter: React.FC = () => {
     columnDefs,
     defaultColDef,
     overlayNoRowsTemplate,
+    frameworkComponents,
     error,
   } = state.grid;
   console.log('re-rendering blotter');
@@ -35,6 +36,7 @@ const OrderBlotter: React.FC = () => {
         columnDefs={columnDefs}
         defaultColDef={defaultColDef}
         overlayNoRowsTemplate={overlayNoRowsTemplate}
+        frameworkComponents={frameworkComponents}
         error={error}
       />
     </div>

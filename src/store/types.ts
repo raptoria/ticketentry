@@ -61,8 +61,13 @@ export interface StoreContextType {
 }
 
 export enum OrderType {
-  LMT = 'lmt',
-  MKT = 'mkt',
+  LMT = 'Limit',
+  MKT = 'Market',
+}
+
+export enum Direction {
+  BUY = 'Buy',
+  SELL = 'Sell',
 }
 
 export interface GridProps extends GridOptions {
