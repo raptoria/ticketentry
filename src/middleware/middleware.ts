@@ -12,7 +12,7 @@ export const applyMiddleware = (dispatch: Dispatch<Action>) => async (
   switch (action.type) {
     case ActionTypes.submitOrder:
       setTimeout(() => {
-        if (count < 10) {
+        if (count < 9) {
           count++;
           dispatch({
             type: ActionTypes.receiveOrder,

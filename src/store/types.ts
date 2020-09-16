@@ -16,7 +16,7 @@ export interface FieldData {
   errors: string[];
 }
 
-export type OrderKeys = keyof Order;
+export type OrderKeys = keyof Fields;
 
 type FieldError = {
   [key in OrderKeys]?: string[];

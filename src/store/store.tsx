@@ -28,10 +28,6 @@ export const StoreContext = createContext<StoreContextType>(
 export const StoreProvider: React.FC = ({ children }) => {
   const [state, dispatch] = useReducer(rootReducer, initialState);
 
-  useEffect(() => {
-    console.log('rendering App'); //removelater
-  });
-
   const enhancedDispatch = applyMiddleware(dispatch);
   const actions = useActions(enhancedDispatch);
 

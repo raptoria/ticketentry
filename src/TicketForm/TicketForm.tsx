@@ -53,7 +53,6 @@ const TicketForm: React.FC = () => {
 
   const onChange = useCallback(
     (fields: Fields) => {
-      console.log('Received values from form: ', fields);
       actions.editOrder({ fields });
     },
     [actions]

@@ -8,7 +8,7 @@ const OrderBlotter: React.FC = () => {
   const headerHeight = getComputedStyle(
     document.documentElement
   ).getPropertyValue('--header-height');
-  const gridHeight = `calc(100% - ${headerHeight} )`; //get rid of  grid scrollbars */
+  const gridHeight = `calc(100% - ${headerHeight} )`; //get rid of  grid scrollbars
 
   const { state } = useContext(StoreContext);
   const {
