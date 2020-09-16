@@ -72,4 +72,5 @@ export const grid: GridProps = {
   overlayNoRowsTemplate: 'No orders to display.',
   gridHeight: '100%',
   enableBrowserTooltips: true,
+  loading: false,
 };

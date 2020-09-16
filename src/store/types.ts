@@ -93,4 +93,5 @@ export enum Direction {
 export interface GridProps extends GridOptions {
   modules: Array<Module>;
   gridHeight: string;
+  loading: boolean;
 }

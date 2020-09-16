@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { AgGridReact } from '@ag-grid-community/react';
-import { Alert } from 'antd';
-import { GridReadyEvent } from '@ag-grid-community/core';
+import { Spin } from 'antd';
 import { GridProps } from '../store/types';
-
-const onGridReady = (params: GridReadyEvent) => {
-  //params?.api.setGridAutoHeight(true);
-};
+import styles from './grid.module.scss';
 
 const GridContainer: React.FC<GridProps> = ({
   rowData,
@@ -17,6 +13,7 @@ const GridContainer: React.FC<GridProps> = ({
   frameworkComponents,
   enableBrowserTooltips,
   gridHeight,
+  loading,
 }) => {
   return (
     <div
@@ -27,17 +24,23 @@ const GridContainer: React.FC<GridProps> = ({
       className="ag-theme-alpine"
     >
       {columnDefs ? (
-        <AgGridReact
-          modules={modules}
-          columnDefs={columnDefs}
-          rowData={rowData}
-          onGridReady={onGridReady}
-          defaultColDef={defaultColDef}
-          overlayNoRowsTemplate={overlayNoRowsTemplate}
-          frameworkComponents={frameworkComponents}
-          enableBrowserTooltips={enableBrowserTooltips}
-        />
-      ) : null}
+        <Fragment>
+          <div className={styles.loadingIndicator}>
+            {loading ? <Spin /> : null}
+          </div>
+          <AgGridReact
+            modules={modules}
+            columnDefs={columnDefs}
+            rowData={rowData}
+            defaultColDef={defaultColDef}
+            overlayNoRowsTemplate={overlayNoRowsTemplate}
+            frameworkComponents={frameworkComponents}
+            enableBrowserTooltips={enableBrowserTooltips}
+          />
+        </Fragment>
+      ) : (
+        'This grid requires valid columns to display properly.'
+      )}
     </div>
   );
 };
