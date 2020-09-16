@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { PageHeader, Button, Form, Select, Input, InputNumber } from 'antd';
 import { StoreContext } from '../store/store';
 import {
@@ -14,24 +14,6 @@ const styles = require('./ticketform.module.scss');
 const { Option } = Select;
 const { TextArea } = Input;
 
-const getFieldData = (fields: Fields | undefined): FieldData[] => {
-  const fieldsData: FieldData[] = [];
-  if (!fields) {
-    return fieldsData;
-  }
-
-  for (const [key, value] of Object.entries(fields)) {
-    fieldsData.push({
-      name: [key],
-      value,
-      touched: false,
-      validating: false,
-      errors: fields.errors[key as OrderKeys] || [],
-    });
-  }
-  return fieldsData;
-};
-
 const TicketForm: React.FC = () => {
   const {
     state: {
@@ -42,41 +24,66 @@ const TicketForm: React.FC = () => {
 
   const isMarketOrder = OrderType.MKT === fields?.orderType;
 
-  const onChange = (fields: Fields) => {
-    //use callback
-    console.log('Received values from form: ', fields);
-    actions.editOrder({ fields });
-  };
-  /* 
-  const validateNum = (rule: Rule, value: any) => {
-    debugger;
-    if (orderType === OrderType.MKT || value.number > 0) {
-      return Promise.resolve();
+  const getFieldData = useMemo((): FieldData[] => {
+    const fieldsData: FieldData[] = [];
+    if (!fields) {
+      return fieldsData;
     }
-    return Promise.reject('Should be > 0');
-  };
- */
 
-  const onFinish = (fields: Fields) => {
-    //usecallback
-    actions.submitOrder({ fields });
-  };
+    for (const [key, value] of Object.entries(fields)) {
+      fieldsData.push({
+        name: [key],
+        value,
+        touched: false,
+        validating: false,
+        errors: fields.errors[key as OrderKeys] || [],
+      });
+    }
+    return fieldsData;
+  }, [fields]);
 
-  //usecallback
-  const onSymbolSearch = (value: string) => {
-    if (value === '') {
-      console.log(value, symbols);
-      actions.filteredSymbols({ filteredSymbols: [...symbols] });
-    } else {
-      const filteredSymbols = symbols?.filter((s) =>
-        s.toLowerCase().includes(value.toLowerCase())
-      );
-      if (filteredSymbols && filteredSymbols.length > 0) {
-        console.log(value, filteredSymbols);
-        actions.filteredSymbols({ filteredSymbols });
+  const onChange = useCallback(
+    (fields: Fields) => {
+      console.log('Received values from form: ', fields);
+      actions.editOrder({ fields });
+    },
+    [actions]
+  );
+
+  const disableSubmit = useMemo((): boolean => {
+    return isMarketOrder
+      ? !(fields?.symbol && fields?.qty)
+      : !(fields?.symbol && fields?.qty && fields?.price && fields?.stopPrice);
+  }, [fields]);
+
+  const onFinish = useCallback(
+    (fields: Fields) => {
+      actions.submitOrder({ fields });
+    },
+    [actions]
+  );
+
+  const onSymbolSearch = useCallback(
+    debounce((value: string) => {
+      if (value.trim() === '') {
+        actions.filteredSymbols({ filteredSymbols: [...symbols] });
+      } else {
+        const filteredSymbols = symbols?.filter((s) =>
+          s.toLowerCase().includes(value.toLowerCase())
+        );
+        if (filteredSymbols && filteredSymbols.length > 0) {
+          actions.filteredSymbols({ filteredSymbols });
+        } else {
+          actions.filteredSymbols({ filteredSymbols: [] });
+        }
       }
-    }
-  };
+    }, 500),
+    [actions]
+  );
+
+  const onClear = useCallback(() => {
+    actions.filteredSymbols({ filteredSymbols: [...symbols] });
+  }, [actions]);
 
   return (
     <div className={styles.ticketForm}>
@@ -84,7 +91,7 @@ const TicketForm: React.FC = () => {
 
       <Form
         className={styles.grid}
-        fields={getFieldData(fields)}
+        fields={getFieldData}
         onFinish={onFinish}
         onValuesChange={(changedValues, values) => {
           onChange(values);
@@ -103,10 +110,13 @@ const TicketForm: React.FC = () => {
             placeholder="Enter Symbol"
             notFoundContent="Not found"
             filterOption={false}
+            autoClearSearchValue={false}
             onSearch={onSymbolSearch}
             showArrow={false}
             dropdownMatchSelectWidth={true}
             style={{ width: '112px' }}
+            allowClear={true}
+            onClear={onClear}
           >
             {filteredSymbols?.map((symbol: string) => (
               <Option key={symbol} value={symbol}>
@@ -117,7 +127,7 @@ const TicketForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item label="Qty" name="qty">
-          <InputNumber min={0} type="number" />
+          <InputNumber min={0} max={999} type="number" />
         </Form.Item>
 
         <Form.Item label="Price" name="price">
@@ -175,7 +185,7 @@ const TicketForm: React.FC = () => {
             justifySelf: 'end',
           }}
         >
-          <Button type="primary" htmlType="submit">
+          <Button type="primary" htmlType="submit" disabled={disableSubmit}>
             Submit
           </Button>
         </Form.Item>
