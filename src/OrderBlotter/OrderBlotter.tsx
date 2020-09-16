@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { PageHeader } from 'antd';
 import GridContainer from '../GridContainer/GridContainer';
 import { StoreContext } from '../store/store';
-const styles = require('./orderblotter.module.scss');
+import styles from './orderblotter.module.scss';
 
 const OrderBlotter: React.FC = () => {
   const headerHeight = getComputedStyle(

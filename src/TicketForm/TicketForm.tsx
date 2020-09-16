@@ -9,7 +9,7 @@ import {
   Fields,
 } from '../store/types';
 import { debounce } from 'lodash-es';
-const styles = require('./ticketform.module.scss');
+import styles from './ticketform.module.scss';
 
 const { Option } = Select;
 const { TextArea } = Input;
