@@ -23,6 +23,7 @@ const TicketForm: React.FC = () => {
   } = useContext(StoreContext);
 
   const isMarketOrder = OrderType.MKT === fields?.orderType;
+  const isDirectionBuy = Direction.BUY === fields?.action;
 
   const getFieldData = useMemo((): FieldData[] => {
     const fieldsData: FieldData[] = [];
@@ -98,7 +99,7 @@ const TicketForm: React.FC = () => {
         }}
       >
         <Form.Item label="Action" name="action">
-          <Select>
+          <Select className={isDirectionBuy ? styles.buy : styles.sell}>
             <Option value={Direction.BUY}>Buy</Option>
             <Option value={Direction.SELL}>Sell</Option>
           </Select>

@@ -9,6 +9,24 @@
       display: inline-block;
     }
   }
+
+  .buy {
+    :global {
+      .ant-select-selector {
+        background-color: #23ce77;
+        color: white;
+      }
+    }
+  }
+
+  .sell {
+    :global {
+      .ant-select-selector {
+        background-color: #f50c5b;
+        color: white;
+      }
+    }
+  }
 }
 
 .grid {
