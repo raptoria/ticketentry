@@ -39,6 +39,7 @@ export interface Order {
   symbols?: string[];
   filteredSymbols?: string[];
   error?: string | null;
+  timestamp?: string;
 }
 
 export interface State {
@@ -94,4 +95,5 @@ export interface GridProps extends GridOptions {
   modules: Array<Module>;
   gridHeight: string;
   loading: boolean;
+  timestamp?: string;
 }

@@ -1,5 +1,6 @@
 import { Action, ActionTypes } from '../store/types';
 import { Dispatch } from 'react';
+import moment from 'moment';
 
 let count = 0; //hack to mimic a failing API
 
@@ -15,7 +16,10 @@ export const applyMiddleware = (dispatch: Dispatch<Action>) => async (
           count++;
           dispatch({
             type: ActionTypes.receiveOrder,
-            payload: action.payload,
+            payload: {
+              ...action.payload,
+              timestamp: moment().format('HH:mm:ss A'),
+            },
           });
         } else {
           count = 0;

@@ -73,4 +73,5 @@ export const grid: GridProps = {
   gridHeight: '100%',
   enableBrowserTooltips: true,
   loading: false,
+  timestamp: '<N/A>',
 };

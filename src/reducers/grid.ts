@@ -5,13 +5,11 @@ export const grid: Reducer<State['grid'], Action> = (state, action) => {
   switch (action.type) {
     case ActionTypes.failedOrder:
       return { ...state, loading: false };
-    case ActionTypes.submitOrder:
-      return { ...state, loading: true };
     case ActionTypes.receiveOrder:
-      console.log('running reducer', action.type);
       return {
         ...state,
         loading: false,
+        timestamp: action.payload.timestamp,
         rowData: [...state.rowData, action.payload.fields],
       };
   }

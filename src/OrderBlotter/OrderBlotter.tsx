@@ -20,15 +20,16 @@ const OrderBlotter: React.FC = () => {
     frameworkComponents,
     enableBrowserTooltips,
     loading,
+    timestamp,
   } = state.grid;
-  console.log('re-rendering blotter');
+
   return (
     <div className={styles.orderBlotter}>
       <PageHeader
         className="site-page-header"
         title=""
         subTitle="Order Blotter"
-        extra="Last Updated On: MAKEMEDYNAMIC"
+        extra={`Last Updated On: ${timestamp}`}
       />
       <GridContainer
         gridHeight={gridHeight}
