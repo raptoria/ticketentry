@@ -1,14 +1,26 @@
-import { GridProps } from '../store/types';
+import { Direction, GridProps } from '../store/types';
 import { uppercaseRenderer } from '../GridContainer/renderers/uppercaseRenderer';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { ICellRendererParams } from '@ag-grid-community/core';
 
 export const grid: GridProps = {
   rowData: [],
   modules: [ClientSideRowModelModule],
   columnDefs: [
     {
+      maxWidth: 100,
       headerName: 'Action',
       field: 'action',
+      cellStyle: (params: ICellRendererParams) =>
+        params.value === Direction.BUY
+          ? {
+              backgroundColor: 'var(--buy-background)',
+              color: 'var(--primary-color)',
+            }
+          : {
+              backgroundColor: 'var(--sell-background)',
+              color: 'var(--primary-color)',
+            },
     },
     {
       headerName: 'Symbol',
@@ -37,6 +49,7 @@ export const grid: GridProps = {
       field: 'stopPrice',
     },
     {
+      tooltipField: 'comment',
       headerName: 'Comment',
       field: 'comment',
     },
@@ -59,4 +72,5 @@ export const grid: GridProps = {
   overlayNoRowsTemplate: 'No orders to display.',
   error: null,
   gridHeight: '100%',
+  enableBrowserTooltips: true,
 };

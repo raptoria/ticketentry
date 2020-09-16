@@ -18,6 +18,7 @@ const OrderBlotter: React.FC = () => {
     defaultColDef,
     overlayNoRowsTemplate,
     frameworkComponents,
+    enableBrowserTooltips,
     error,
   } = state.grid;
   console.log('re-rendering blotter');
@@ -37,6 +38,7 @@ const OrderBlotter: React.FC = () => {
         defaultColDef={defaultColDef}
         overlayNoRowsTemplate={overlayNoRowsTemplate}
         frameworkComponents={frameworkComponents}
+        enableBrowserTooltips={enableBrowserTooltips}
         error={error}
       />
     </div>

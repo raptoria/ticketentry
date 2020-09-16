@@ -15,6 +15,7 @@ const GridContainer: React.FC<GridProps> = ({
   defaultColDef,
   overlayNoRowsTemplate,
   frameworkComponents,
+  enableBrowserTooltips,
   error,
   gridHeight,
 }) => {
@@ -36,6 +37,7 @@ const GridContainer: React.FC<GridProps> = ({
           defaultColDef={defaultColDef}
           overlayNoRowsTemplate={overlayNoRowsTemplate}
           frameworkComponents={frameworkComponents}
+          enableBrowserTooltips={enableBrowserTooltips}
         />
       ) : null}
     </div>
