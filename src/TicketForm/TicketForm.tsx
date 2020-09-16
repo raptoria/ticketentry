@@ -8,6 +8,7 @@ import {
   Direction,
   Fields,
 } from '../store/types';
+import { debounce } from 'lodash-es';
 const styles = require('./ticketform.module.scss');
 
 const { Option } = Select;
@@ -34,7 +35,7 @@ const getFieldData = (fields: Fields | undefined): FieldData[] => {
 const TicketForm: React.FC = () => {
   const {
     state: {
-      order: { fields, symbols },
+      order: { fields, symbols, filteredSymbols },
     },
     actions,
   } = useContext(StoreContext);
@@ -42,6 +43,7 @@ const TicketForm: React.FC = () => {
   const isMarketOrder = OrderType.MKT === fields?.orderType;
 
   const onChange = (fields: Fields) => {
+    //use callback
     console.log('Received values from form: ', fields);
     actions.editOrder({ fields });
   };
@@ -56,12 +58,24 @@ const TicketForm: React.FC = () => {
  */
 
   const onFinish = (fields: Fields) => {
+    //usecallback
     actions.submitOrder({ fields });
   };
 
+  //usecallback
   const onSymbolSearch = (value: string) => {
-    const filteredSymbols = symbols?.filter((s) => s.startsWith(value));
-    actions.filteredSymbols({ filteredSymbols });
+    if (value === '') {
+      console.log(value, symbols);
+      actions.filteredSymbols({ filteredSymbols: [...symbols] });
+    } else {
+      const filteredSymbols = symbols?.filter((s) =>
+        s.toLowerCase().includes(value.toLowerCase())
+      );
+      if (filteredSymbols && filteredSymbols.length > 0) {
+        console.log(value, filteredSymbols);
+        actions.filteredSymbols({ filteredSymbols });
+      }
+    }
   };
 
   return (
@@ -94,7 +108,7 @@ const TicketForm: React.FC = () => {
             dropdownMatchSelectWidth={true}
             style={{ width: '112px' }}
           >
-            {symbols?.map((symbol: string) => (
+            {filteredSymbols?.map((symbol: string) => (
               <Option key={symbol} value={symbol}>
                 {symbol}
               </Option>

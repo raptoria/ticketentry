@@ -5,11 +5,10 @@ export const order: Reducer<State['order'], Action> = (state, action) => {
   switch (action.type) {
     case ActionTypes.editOrder:
       console.log('running reducer', action.type);
-      return { ...action.payload };
+      return { ...state, ...action.payload };
     case ActionTypes.filteredSymbols:
       console.log('running reducer', action.type);
-      debugger;
-      return { ...state, symbols: [] };
+      return { ...state, filteredSymbols: [...action.payload.filteredSymbols] };
   }
   return state;
 };

@@ -1,5 +1,18 @@
 import { Order, OrderType, Direction } from '../store/types';
 
+const symbols = [
+  'AAPL',
+  'MSFT',
+  'GOOGL',
+  'VZ',
+  'MMM',
+  'NFLX',
+  'FB',
+  'TWTR',
+  'AMZN',
+  'EBAY',
+];
+
 export const order: Order = {
   fields: {
     action: Direction.BUY,
@@ -12,17 +25,6 @@ export const order: Order = {
     tif: 'DAY',
     errors: {}, //{ qty: ['oops!'] },
   },
-  symbols: [
-    'AAPL',
-    'MSFT',
-    'GOOGL',
-    'VZ',
-    'MMM',
-    'NFLX',
-    'FB',
-    'TWTR',
-    'AMZN',
-    'EBAY',
-  ],
-  filteredSymbols: [],
+  symbols: [...symbols],
+  filteredSymbols: [...symbols],
 };
