@@ -27,4 +27,5 @@ export const order: Order = {
   },
   symbols: [...symbols],
   filteredSymbols: [...symbols],
+  error: null,
 };

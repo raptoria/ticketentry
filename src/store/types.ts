@@ -5,6 +5,7 @@ import {
   editOrder,
   receiveOrder,
   filteredSymbols,
+  failedOrder,
 } from '../actions/actions';
 
 export interface FieldData {
@@ -37,6 +38,7 @@ export interface Order {
   fields?: Fields;
   symbols?: string[];
   filteredSymbols?: string[];
+  error?: string | null;
 }
 
 export interface State {
@@ -50,15 +52,18 @@ export const enum ActionTypes {
   receiveOrder = 'RECEIVE_ORDER',
   editOrder = 'EDIT_ORDER',
   filteredSymbols = 'FILTER_SYMBOLS',
+  failedOrder = 'FAILED_ORDER',
 }
 
 export type Action =
   | { type: ActionTypes.filteredSymbols; payload: State['order'] }
   | { type: ActionTypes.submitOrder; payload: State['order'] }
   | { type: ActionTypes.receiveOrder; payload: State['order'] }
-  | { type: ActionTypes.editOrder; payload: State['order'] };
+  | { type: ActionTypes.editOrder; payload: State['order'] }
+  | { type: ActionTypes.failedOrder; payload: State['order'] };
 
 export interface Actions {
+  failedOrder: (...p: Parameters<typeof failedOrder>) => void;
   submitOrder: (...p: Parameters<typeof submitOrder>) => void;
   receiveOrder: (...p: Parameters<typeof receiveOrder>) => void;
   editOrder: (...p: Parameters<typeof editOrder>) => void;
@@ -87,6 +92,5 @@ export enum Direction {
 
 export interface GridProps extends GridOptions {
   modules: Array<Module>;
-  error: string | null;
   gridHeight: string;
 }

@@ -1,5 +1,13 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import { PageHeader, Button, Form, Select, Input, InputNumber } from 'antd';
+import {
+  PageHeader,
+  Button,
+  Form,
+  Select,
+  Input,
+  InputNumber,
+  Alert,
+} from 'antd';
 import { StoreContext } from '../store/store';
 import {
   OrderType,
@@ -17,7 +25,7 @@ const { TextArea } = Input;
 const TicketForm: React.FC = () => {
   const {
     state: {
-      order: { fields, symbols, filteredSymbols },
+      order: { fields, symbols, filteredSymbols, error },
     },
     actions,
   } = useContext(StoreContext);
@@ -86,10 +94,22 @@ const TicketForm: React.FC = () => {
     actions.filteredSymbols({ filteredSymbols: [...symbols] });
   }, [actions]);
 
+  const onErrorClosed = useCallback(() => {
+    actions.failedOrder({ error: null });
+  }, [actions]);
+
   return (
     <div className={styles.ticketForm}>
       <PageHeader title="EXD Trader" subTitle="Order Entry" />
-
+      {error ? (
+        <Alert
+          type="error"
+          showIcon={true}
+          message={error}
+          closeText="Ok"
+          onClose={onErrorClosed}
+        />
+      ) : null}
       <Form
         className={styles.grid}
         fields={getFieldData}

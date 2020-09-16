@@ -70,7 +70,6 @@ export const grid: GridProps = {
     uppercaseRenderer,
   },
   overlayNoRowsTemplate: 'No orders to display.',
-  error: null,
   gridHeight: '100%',
   enableBrowserTooltips: true,
 };

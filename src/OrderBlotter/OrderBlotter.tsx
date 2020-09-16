@@ -19,7 +19,6 @@ const OrderBlotter: React.FC = () => {
     overlayNoRowsTemplate,
     frameworkComponents,
     enableBrowserTooltips,
-    error,
   } = state.grid;
   console.log('re-rendering blotter');
   return (
@@ -39,7 +38,6 @@ const OrderBlotter: React.FC = () => {
         overlayNoRowsTemplate={overlayNoRowsTemplate}
         frameworkComponents={frameworkComponents}
         enableBrowserTooltips={enableBrowserTooltips}
-        error={error}
       />
     </div>
   );

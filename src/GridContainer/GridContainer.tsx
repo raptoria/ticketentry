@@ -16,7 +16,6 @@ const GridContainer: React.FC<GridProps> = ({
   overlayNoRowsTemplate,
   frameworkComponents,
   enableBrowserTooltips,
-  error,
   gridHeight,
 }) => {
   return (
@@ -27,7 +26,6 @@ const GridContainer: React.FC<GridProps> = ({
       }}
       className="ag-theme-alpine"
     >
-      {error ? <Alert type="error" showIcon={true} message={error} /> : null}
       {columnDefs ? (
         <AgGridReact
           modules={modules}

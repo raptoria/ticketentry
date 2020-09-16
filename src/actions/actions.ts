@@ -29,8 +29,17 @@ export const filteredSymbols = (payload: State['order']): Action => {
   };
 };
 
+export const failedOrder = (payload: State['order']): Action => {
+  return {
+    type: ActionTypes.failedOrder,
+    payload,
+  };
+};
+
 //synonymous with bindActionCreators in mapDispatchToProps, 2nd arg of connect
 export const useActions = (dispatch: Dispatch<Action>) => ({
+  failedOrder: (payload: State['order']): void =>
+    dispatch(failedOrder(payload)),
   filteredSymbols: (payload: State['order']): void =>
     dispatch(filteredSymbols(payload)),
   receiveOrder: (payload: State['order']): void =>
