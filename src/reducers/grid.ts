@@ -7,7 +7,7 @@ export const grid: Reducer<State['grid'], Action> = (state, action) => {
       console.log('running reducer', action.type);
       return {
         ...state,
-        rowData: [...state.rowData, action.payload],
+        rowData: [...state.rowData, action.payload.fields],
       };
   }
   return state;

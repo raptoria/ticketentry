@@ -3,41 +3,47 @@ import { PageHeader, Button, Form, Select, Input, InputNumber } from 'antd';
 import { StoreContext } from '../store/store';
 import {
   OrderType,
-  Order,
   FieldData,
   OrderKeys,
   Direction,
+  Fields,
 } from '../store/types';
 const styles = require('./ticketform.module.scss');
 
 const { Option } = Select;
 const { TextArea } = Input;
 
-const getFieldData = (order: Order): FieldData[] => {
-  const fields: FieldData[] = [];
-  for (const [key, value] of Object.entries(order)) {
-    fields.push({
+const getFieldData = (fields: Fields | undefined): FieldData[] => {
+  const fieldsData: FieldData[] = [];
+  if (!fields) {
+    return fieldsData;
+  }
+
+  for (const [key, value] of Object.entries(fields)) {
+    fieldsData.push({
       name: [key],
       value,
       touched: false,
       validating: false,
-      errors: order.errors[key as OrderKeys] || [],
+      errors: fields.errors[key as OrderKeys] || [],
     });
   }
-  return fields;
+  return fieldsData;
 };
 
 const TicketForm: React.FC = () => {
   const {
-    state: { order },
+    state: {
+      order: { fields, symbols },
+    },
     actions,
   } = useContext(StoreContext);
 
-  const isMarketOrder = OrderType.MKT === order.orderType;
+  const isMarketOrder = OrderType.MKT === fields?.orderType;
 
-  const onChange = (values: Order) => {
-    console.log('Received values from form: ', values);
-    actions.editOrder(values);
+  const onChange = (fields: Fields) => {
+    console.log('Received values from form: ', fields);
+    actions.editOrder({ fields });
   };
   /* 
   const validateNum = (rule: Rule, value: any) => {
@@ -49,8 +55,13 @@ const TicketForm: React.FC = () => {
   };
  */
 
-  const onFinish = (values: Order) => {
-    actions.submitOrder(values);
+  const onFinish = (fields: Fields) => {
+    actions.submitOrder({ fields });
+  };
+
+  const onSymbolSearch = (value: string) => {
+    const filteredSymbols = symbols?.filter((s) => s.startsWith(value));
+    actions.filteredSymbols({ filteredSymbols });
   };
 
   return (
@@ -59,7 +70,7 @@ const TicketForm: React.FC = () => {
 
       <Form
         className={styles.grid}
-        fields={getFieldData(order)}
+        fields={getFieldData(fields)}
         onFinish={onFinish}
         onValuesChange={(changedValues, values) => {
           onChange(values);
@@ -73,7 +84,22 @@ const TicketForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item label="Symbol" name="symbol">
-          <Input placeholder="<Enter Symbol>" />
+          <Select
+            showSearch={true}
+            placeholder="Enter Symbol"
+            notFoundContent="Not found"
+            filterOption={false}
+            onSearch={onSymbolSearch}
+            showArrow={false}
+            dropdownMatchSelectWidth={true}
+            style={{ width: '112px' }}
+          >
+            {symbols?.map((symbol: string) => (
+              <Option key={symbol} value={symbol}>
+                {symbol}
+              </Option>
+            ))}
+          </Select>
         </Form.Item>
 
         <Form.Item label="Qty" name="qty">
@@ -98,7 +124,7 @@ const TicketForm: React.FC = () => {
         </Form.Item>
 
         <Form.Item label="TIF" name="tif">
-          <Select style={{ width: '50%' }}>
+          <Select>
             <Option value="gtc">GTC</Option>
             <Option value="day">DAY</Option>
             <Option value="fok">FOK</Option>

@@ -1,5 +1,10 @@
 import { GridOptions, Module } from '@ag-grid-community/core';
-import { submitOrder, editOrder, receiveOrder } from '../actions/actions';
+import {
+  submitOrder,
+  editOrder,
+  receiveOrder,
+  filteredSymbols,
+} from '../actions/actions';
 
 export interface FieldData {
   name: string[];
@@ -15,9 +20,9 @@ type FieldError = {
   [key in OrderKeys]?: string[];
 };
 
-export interface Order {
+export interface Fields {
   action: string;
-  symbol: string;
+  symbol: string | undefined;
   qty: number;
   price: number;
   stopPrice: number;
@@ -25,6 +30,12 @@ export interface Order {
   tif: string;
   comment: string;
   errors: FieldError;
+}
+
+export interface Order {
+  fields?: Fields;
+  symbols?: string[];
+  filteredSymbols?: string[];
 }
 
 export interface State {
@@ -37,9 +48,11 @@ export const enum ActionTypes {
   submitOrder = 'SUBMIT_ORDER',
   receiveOrder = 'RECEIVE_ORDER',
   editOrder = 'EDIT_ORDER',
+  filteredSymbols = 'FILTER_SYMBOLS',
 }
 
 export type Action =
+  | { type: ActionTypes.filteredSymbols; payload: State['order'] }
   | { type: ActionTypes.submitOrder; payload: State['order'] }
   | { type: ActionTypes.receiveOrder; payload: State['order'] }
   | { type: ActionTypes.editOrder; payload: State['order'] };
@@ -48,6 +61,7 @@ export interface Actions {
   submitOrder: (...p: Parameters<typeof submitOrder>) => void;
   receiveOrder: (...p: Parameters<typeof receiveOrder>) => void;
   editOrder: (...p: Parameters<typeof editOrder>) => void;
+  filteredSymbols: (...p: Parameters<typeof filteredSymbols>) => void;
 }
 
 export interface StoreContext {
