@@ -74,7 +74,7 @@ const TicketForm: React.FC = () => {
   const onSymbolSearch = useCallback(
     debounce((value: string) => {
       if (value.trim() === '') {
-        actions.filteredSymbols({ filteredSymbols: [...symbols] });
+        actions.filteredSymbols({ filteredSymbols: [...symbols!] });
       } else {
         const filteredSymbols = symbols?.filter((s) =>
           s.toLowerCase().includes(value.toLowerCase())
@@ -90,7 +90,7 @@ const TicketForm: React.FC = () => {
   );
 
   const onClear = useCallback(() => {
-    actions.filteredSymbols({ filteredSymbols: [...symbols] });
+    actions.filteredSymbols({ filteredSymbols: [...symbols!] });
   }, [actions]);
 
   const onErrorClosed = useCallback(() => {
@@ -205,7 +205,12 @@ const TicketForm: React.FC = () => {
             justifySelf: 'end',
           }}
         >
-          <Button type="primary" htmlType="submit" disabled={disableSubmit}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={disableSubmit}
+            data-testid="submitButton"
+          >
             Submit
           </Button>
         </Form.Item>

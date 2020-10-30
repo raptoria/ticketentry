@@ -6,7 +6,10 @@ export const order: Reducer<State['order'], Action> = (state, action) => {
     case ActionTypes.editOrder:
       return { ...state, ...action.payload };
     case ActionTypes.filteredSymbols:
-      return { ...state, filteredSymbols: [...action.payload.filteredSymbols] };
+      return {
+        ...state,
+        filteredSymbols: [...action.payload.filteredSymbols!],
+      };
     case ActionTypes.failedOrder:
       return { ...state, error: action.payload.error };
     case ActionTypes.receiveOrder:

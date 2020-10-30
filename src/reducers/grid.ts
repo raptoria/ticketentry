@@ -12,7 +12,7 @@ export const grid: Reducer<State['grid'], Action> = (state, action) => {
         ...state,
         loading: false,
         timestamp: action.payload.timestamp,
-        rowData: [...state.rowData, action.payload.fields],
+        rowData: [...state.rowData!, action.payload.fields],
       };
   }
   return state;
