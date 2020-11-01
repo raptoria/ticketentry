@@ -68,7 +68,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       favicon: 'src/assets/images/favicon.ico',
       template: './src/index.html',
-      title: 'pnl visualization',
+      title: 'Fast Position Trader',
     }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output

@@ -20,7 +20,7 @@ export const order: Order = {
     orderType: OrderType.MKT,
     price: 0,
     qty: 0,
-    stopPrice: 0,
+    limitPrice: 0,
     symbol: undefined,
     tif: 'DAY',
     errors: {}, //{ qty: ['oops!'] },

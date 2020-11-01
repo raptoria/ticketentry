@@ -61,7 +61,7 @@ const TicketForm: React.FC = () => {
   const disableSubmit = useMemo((): boolean => {
     return isMarketOrder
       ? !(fields?.symbol && fields?.qty)
-      : !(fields?.symbol && fields?.qty && fields?.price && fields?.stopPrice);
+      : !(fields?.symbol && fields?.qty && fields?.limitPrice);
   }, [fields]);
 
   const onFinish = useCallback(
@@ -99,7 +99,7 @@ const TicketForm: React.FC = () => {
 
   return (
     <div className={styles.ticketForm}>
-      <PageHeader title="EXD Trader" subTitle="Order Entry" />
+      <PageHeader title="FPTrader" subTitle="Order Entry" />
       {error ? (
         <Alert
           type="error"
@@ -150,13 +150,13 @@ const TicketForm: React.FC = () => {
           <InputNumber min={0} max={999} type="number" />
         </Form.Item>
 
-        <Form.Item label="Price" name="price">
+        <Form.Item label="Limit Price" name="limitPrice">
           <InputNumber
             min={0}
             precision={2}
             step={0.01}
-            disabled={isMarketOrder}
             type="number"
+            disabled={isMarketOrder}
           />
         </Form.Item>
 
@@ -176,24 +176,6 @@ const TicketForm: React.FC = () => {
           </Select>
         </Form.Item>
 
-        <Form.Item
-          label="Stop Price"
-          name="stopPrice"
-          style={{
-            display: 'inline-block',
-            gridColumn: 'span 2',
-            justifySelf: 'end',
-          }}
-        >
-          <InputNumber
-            min={0}
-            precision={2}
-            step={0.01}
-            type="number"
-            disabled={isMarketOrder}
-          />
-        </Form.Item>
-
         <Form.Item name="comment" style={{ gridColumn: 'span 2' }}>
           <TextArea placeholder="<COMMENT>" rows={4} />
         </Form.Item>
@@ -201,7 +183,7 @@ const TicketForm: React.FC = () => {
         <Form.Item
           style={{
             display: 'inline-block',
-            gridColumn: 'span 2',
+            gridColumn: 'span 4',
             justifySelf: 'end',
           }}
         >

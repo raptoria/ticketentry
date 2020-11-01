@@ -45,8 +45,8 @@ export const grid: GridProps = {
       field: 'price',
     },
     {
-      headerName: 'Stop Price',
-      field: 'stopPrice',
+      headerName: 'Limit Price',
+      field: 'limitPrice',
     },
     {
       tooltipField: 'comment',

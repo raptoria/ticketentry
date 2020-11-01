@@ -27,7 +27,7 @@ export interface Fields {
   symbol: string | undefined;
   qty: number;
   price: number;
-  stopPrice: number;
+  limitPrice: number;
   orderType: OrderType;
   tif: string;
   comment: string;
